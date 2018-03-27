@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table>   <tr>
+                         <td><B>11111</B></td>
+                         <td align="center"><B>2222</B></td>
+                         <td align="center"><B>3333</B></td>
+                         <td class="result"> 
+                         <select id="grade">
+                              <option value ="1">1</option>
+                              <option value ="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                        </select></td>
+                         <td><B><input type="button" class="btn"  value="提交"/></B></td>
+  </tr> <tr>
+                         <td><B>11111</B></td>
+                         <td align="center"><B>2222</B></td>
+                         <td align="center"><B>3333</B></td>
+                         <td class="result"> 
+                         <select id="grade">
+                              <option value ="1">1</option>
+                              <option value ="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                        </select></td>
+                         <td><B><input type="button" class="btn"  value="提交"/></B></td>
+  </tr> <tr>
+                         <td><B>11111</B></td>
+                         <td align="center"><B>2222</B></td>
+                         <td align="center"><B>3333</B></td>
+                         <td class="result"> 
+                         <select id="grade">
+                              <option value ="1">1</option>
+                              <option value ="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
+                        </select></td>
+                         <td><B><input type="button" class="btn"  value="提交"/></B></td>
+  </tr></table>
+<input type="button" value="获取" onclick="alert('第2行select：'+$('table tr:eq(1) select').val())"/>
+<script>
+//$('.btn').click(function(){alert($(this).parents('tr').find('select').val())})
+  </script>
+	</body>
+</html>

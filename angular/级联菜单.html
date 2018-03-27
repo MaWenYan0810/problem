@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="ftitApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>级联菜单</title>
+		<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/angular/angular.min.js"></script>
+		<!--<script src="lib/angular/angular-route.min.js"> </script>-->
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	</head>
+	<body>
+	　<p>
+            <label>
+                <span>所属题库：</span>
+                <select ng-model="modelone" ng-options="val.id as val.name for val in cascading" ng-change="changeone(modelone)">
+                    <option value="">--请选择--</option>
+                </select>
+            </label>
+            <label>
+                <select name="" ng-model="modeltwo" ng-options="val.id as val.name for val in cascadingtwo">
+                    <option value="">--请选择--</option>
+                </select>
+            </label>
+ </p>
+<script>
+	app.controller('addmultiple_scontroller', function($scope, $http) {
+    //常量
+    $scope.postCfg = postCfg;
+    $scope.modelone = "";
+    $scope.modeltwo = "";
+    $http.post("./getAllExamNameByTid.action").success(function(res) {
+        $scope.cascading = res;
+    });
+    
+    $scope.changeone = function(val) {
+        if(null != val){
+            $http.post("./getAllExamClassifyByEnid.action",{
+                "en_id": val
+                },$scope.postCfg).success(function(res) {
+                $scope.cascadingtwo = res;
+            });
+        }
+    }
+});
+</script>
+	</body>
+</html>
+

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table id="id">
+			<thead>
+				<tr>
+					<td></td>
+					<td>key</td>
+					<td>value</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<select name="" id="">
+							<option value="1">菜单</option>
+							<option value="2">按钮</option>
+							<option value="3">其他</option>
+						</select>
+					</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox"/></td>
+					<td>
+						<select name="" id="">
+							<option value="1">菜单</option>
+							<option value="2">按钮</option>
+							<option value="3">其他</option>
+						</select>
+					</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" /></td>
+					<td>
+						<select name="" id="">
+							<option value="1">菜单</option>
+							<option value="2">按钮</option>
+							<option value="3">其他</option>
+						</select>
+					</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<button onclick="getTableContent()">确定</button>
+		<script type="text/javascript"> 
+			function getTableContent(){
+				var mytable=$("#id")
+        		var myData = [];//声明一个数组，用于存放select的值
+        		var myInput= [];//声明一个数组，用于存放input的值
+        		for (var i = 0,tdlen= mytable.length; i < tdlen; i++) {
+            		var select = mytable[i].getElementsByTagName("select");//获取td里所有select
+            		var input = mytable[i].getElementsByTagName('input');//获取td里所有input
+            		for(var i=0; i<input.length; i++){
+    					if(input[i].type=='text'){
+      						myInput.push(input[i].value);
+    					}
+  					}
+            		var len = select.length;//select的个数
+            		if(len==0) continue;//如果个数为0，继续下一个td里select查找
+            		else{
+                		for(var j=0;j<len;j++){//如果个数不为0
+                    		myData.push(select[j].value);//把所有select的值(注意这里是值，不是实际看到的option里的文字)放入myData数组中
+               	 		}
+           	 		}
+        		}
+				console.log(myData)
+				console.log(myInput)
+				var obj={};
+//				for(var i=0;i<myData.length;i++){
+// 					obj[myData[i]]=myInput[i]
+//				}
+//				console.log(obj);
+  			}
+		</script>
+	</body>
+</html>

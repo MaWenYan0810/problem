@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>不同select的值，显示不同</title>
+<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/angular/angular.min.js"></script>
+		
+<script>
+var myApp = angular.module("myApp", []);
+myApp.controller("testCtrl", function($scope){
+   //拆分页数的选择
+    $scope.fchat = new Object();
+    $scope.fchat.replies = [{key: 0, value: ""}];
+    // 初始化时由于只有1条，所以不允许删除
+    $scope.fchat.canDescReply = false;
+    // 增加拆分方式
+    $scope.fchat.incrReply = function($index) {
+        $scope.fchat.replies.splice($index + 1, 0,
+            {key: new Date().getTime(), value: ""});   // 用时间戳作为每个item的key
+        // 增加新的拆分方式后允许删除
+        $scope.fchat.canDescReply = true;
+    };
+//  // 减少拆分方式
+//  $scope.fchat.decrReply = function($index) {
+//      // 如果拆分方式数大于1，删除此条数据
+//      if ($scope.fchat.replies.length > 1) {
+//          $scope.fchat.replies.splice($index, 1);
+//      }
+//      // 如果拆分方式数为1，不允许删除
+//      if ($scope.fchat.replies.length == 1) {
+//          $scope.fchat.canDescReply = false;
+//      }
+//  };
+//   $scope.fchat.combineReplies = function() {
+//      var mytable=$("#convertTable");
+//      var myData = [];//声明一个数组，用于存放select的值
+//      var myInput= [];//声明一个数组，用于存放input的值
+//      for (var i = 0,tdlen= mytable.length; i < tdlen; i++) {
+//          var select = mytable[i].getElementsByTagName("select");//获取td里所有select
+//          var input = mytable[i].getElementsByTagName('input');//获取td里所有input
+//          for (var i = 0; i < input.length; i++) {
+//              if (input[i].type == 'text') {
+//                  myInput.push(input[i].value);
+//              }
+//          }
+//          var len = select.length;//select的个数
+//          if (len == 0) {//如果个数为0，继续下一个td里select查找
+//              continue;
+//          } else {
+//              for (var j = 0; j < len; j++) {//如果个数不为0
+//                  myData.push(select[j].value);//把所有select的值(注意这里是值，不是实际看到的option里的文字)放入myData数组中
+//              }
+//          }
+//      }
+//      var arr=[];
+//      for(var i=0;i<myData.length;i++){
+//          arr.push([myData[i],myInput[i]])
+//      }
+//      console.log(arr)
+//      $http( {
+//          method: 'post',
+//          url:Url+'filemanager/previewPdfEffect',
+//          withCredentials:true,
+//          headers:{
+//              Authorization:token
+//          },
+//          data:{page:JSON.stringify(arr),id:id}
+//      }).then(function successCallback(response) {
+//          if(response.data.code==0){
+//              toastr.success(response.data.message);
+//          }else{
+//              toastr.error(response.data.message);
+//              if($scope.fatherid){
+//                  $scope.fileDetail($scope.fatherid);
+//              }else{
+//                  $scope.loadTable();
+//              }
+//              $("#deleteSure").modal("hide");
+//          }
+//      },function errorCallback(response){
+//          // console.log(response.data)
+//      });
+//  };
+});
+</script>
+</head>
+ 
+<body ng-app="myApp">
+<form ng-controller="testCtrl">
+ <div>
+                    <button type="button" ng-click="fchat.combineReplies()" class="btn btn-info">确定拆分</button>
+                </div>
+                <table class="dataTable table table-striped table-bordered" id="convertTable" style="width:100%">
+                    <thead>
+                    <tr>
+                        <td style="width:30%">拆分方式</td>
+                        <td style="width:50%">拆分页数</td>
+                        <td style="width:20%">操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="reply in fchat.replies">
+                        <td>
+                            <select ng-model="selectValue" class="form-control">
+  								<option value="0">连续</option>
+                                <option value="1">间断</option>
+                                <option value="2">单页</option>
+                                <option value="3">全部</option>
+  							</select>
+                        </td>
+                        <td>
+                          <div ng-switch="selectValue">
+    						<div ng-switch-when="0">
+    							<input type="text"  placeholder="111"/>
+    						</div>
+    						<div ng-switch-when="1">
+    							<input type="text"  placeholder="222" />
+    						</div>
+    						<div ng-switch-when="2">
+    	    					<input type="text"  placeholder="333"/>
+    						</div>
+    						<div ng-switch-default>ah?</div>
+ 						  </div>
+                            <!--<input type="text" class="form-control" ng-model="reply.value"-->
+                                   <!--id="reply{{$index + 1}}" name="reply{{$index + 1}}" />-->
+                        </td>
+                        <td class="pdf-btn">
+                            <a href="" ng-click="fchat.incrReply($index)">
+                                <img src="img/timg.jpg" alt="增加" style="width:20px;height:20px"/>
+                            </a>
+                            <a href="" ng-click="fchat.decrReply($index)" ng-show="fchat.canDescReply">
+                                <img src="img/delete.jpg" alt="减少" style="width:20px;height:20px"/>
+                            </a>
+                            <img src="img/delete.jpg" alt="减少" ng-show="!fchat.canDescReply" style="width:20px;height:20px"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+           
+</form>
+</body>
+</html>
+

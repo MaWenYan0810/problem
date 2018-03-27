@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table id="id">
+			<thead>
+				<tr>
+					<td></td>
+					<td>key</td>
+					<td>value</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>菜单</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+				<tr>
+					<td>按钮</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+				<tr>
+					<td>用户</td>
+					<td><input type="text" placeholder="请输入值" value=""/></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<button onclick="getTableContent()">确定</button>
+		<script type="text/javascript"> 
+			var leng = $("#id tbody tr").length; 
+			function getTableContent(){
+				var mytable=$("#id")
+        		var myData = [];//声明一个数组，用于存放table的值
+        		var myInput= [];//声明一个数组，用于存放input的值
+        		for (var i = 0,tdlen= $("#id tbody tr").length; i < tdlen; i++) {
+        			td = $("#id tbody tr").eq(i).find("td:first").html(); 
+    				myData.push(td); 
+    				input=$("#id tbody tr").eq(i).find("input").val();
+    				if(input==undefined){
+    					input.value="";
+    				}
+    				myInput.push(input);
+        		}
+				console.log(myData)
+				console.log(myInput)
+				var obj={};
+				for(var i=0;i<myData.length;i++){
+   					obj[myData[i]]=myInput[i]
+				}
+				console.log(obj);
+  			}
+		</script>
+	</body>
+</html>

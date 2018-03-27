@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+    	<script src="lib/jquery/jquery.min.js"></script>
+    	<script src="lib/bootstrap/js/bootstrap.js"></script>
+
+	</head>
+	<body>
+		<!--<a data-toggle="modal" href="https://www.baidu.com/" data-target="#modal">Click me</a>-->
+		<button data-toggle="modal" id="btn" data-target="#modal">Click me</button>
+		<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+			<div class="modal-header">加载网页</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer"></div>
+		</div>
+</div>
+</div>
+	<script>
+		$("#myModal").on("hidden", function() {
+			$(this).removeData("modal");
+		});
+		
+		$("#btn").click(function(){
+			$("#myModal").modal({
+				remote: "index.html"
+			});
+		})
+		
+		
+		
+		function getTableRowCellsLength(id, index){
+s
+	</script>
+	</body>
+</html>

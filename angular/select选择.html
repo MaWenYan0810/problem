@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>不同select的值，显示不同</title>
+		<script src="lib/angular/angular.min.js"></script>
+<script>
+var myApp = angular.module("myApp", []);
+myApp.controller("testCtrl", function($scope){
+    $scope.data = [{id:0,value:'hello'},{id:1,value:'bye'},{id:2,value:'hmmmm'}];
+      $scope.selectValue = $scope.data[0].id;
+});
+</script>
+</head>
+ 
+<body ng-app="myApp">
+<form ng-controller="testCtrl">
+  <select ng-model="selectValue" class="form-control">
+  	<option value="0">连续</option>
+                                <option value="1">间断</option>
+                                <option value="2">单页</option>
+                                <option value="3">全部</option>
+  </select>
+  <div ng-switch="selectValue">
+    <div ng-switch-when="0">
+    	<input type="text"  placeholder="111"/>
+    </div>
+    <div ng-switch-when="1">
+    	<input type="text"  placeholder="222" />
+    </div>
+    <div ng-switch-when="2">
+    	<input type="text"  placeholder="333"/>
+    </div>
+    <div ng-switch-default>ah?</div>
+  </div>
+</form>
+</body>
+</html>
+

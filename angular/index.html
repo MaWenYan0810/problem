@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="lesson" ng-controller="FormCtrl" >
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>
+LESSON 8
+  </title>
+  <!--<link rel="stylesheet" type="text/css" href="css/main.css" />-->
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular-auto-validate-master/dist/jcs-auto-validate.min.js"></script>
+  <script src="lib/jquery/jquery.min.js"></script>
+  <style>
+  #content1{padding:16px;}
+  </style>
+ 
+  </head>
+ 
+  <body>
+  
+ 　<div class="form-group col-sm-6">
+      <label for="username" class="control-label">Username</label>
+      <input type="text" class="form-control " placeholder="角色名称" ng-model="model.RoleName" ng-required="true"  ng-minlength="7" ng-pattern="/^[A-Za-z0-9_]{1,5}$/" ng-pattern-err-type="BadName">
+    </div>
+    <input  type="submit" value="提交" />
+    <textarea name="intro" id="" cols="30" rows="10">da的技术课程laxative从落下吗&#xd;asda&#xd;asdas&#xd;</textarea>
+    <textarea>da的技术	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;课程laxative从落下吗&#xd;asda&#xd;asdas&#xd;</textarea>
+<script>
+var app = angular.module("lesson",['jcs-autoValidate','localize']);
+//app.controller("FormCtrl",function($scope){
+// 
+//$scope.myForm={};
+//$scope.UserName = 'Tom';
+// 
+//$scope.PostForm=function(){
+//console.log($scope.myForm);
+//}
+//});
+// 
+ app.run(function (defaultErrorMessageResolver) {
+defaultErrorMessageResolver.getErrorMessages().then(function (errorMessages) {
+errorMessages['BadName'] = '用户名只能包含数字、字母或下划线';
+});
+});
+</script>
+ 
+  </body>
+</html>
+
+
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <title>顶部底部固定，中间自适应</title>
+    <style>
+        #page{margin:0 auto;width:960px;}
+        #header{width:960px; height:60px; position:absolute; top:0;background-color:#ccc;}
+        #footer{width:960px; height:30px; position:absolute; bottom:0; background-color:#ccc;}
+        #content{width:960px; overflow: auto; position:absolute; top:60px; bottom:30px;background: #ddd;}
+    </style>
+ 
+</head>
+<body>
+<div id="page">
+    <div id="header">定义顶部</div>  
+    <div id="content">content定义中间</div>
+    <div id="footer">footer定义底部</div>
+</div>
+</body>
+ 
+ 
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>懒人原创二级导航动画下拉菜单nav</title>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+img{ border:0;}
+body{ padding-top:100px;}
+
+#lanrenzhijia{ width:100%; height:200px; overflow:hidden; position:relative;}
+#lanrenzhijia ul{ width:800px;overflow:hidden;height:auto; position:absolute; left:50%; top:0; margin-left:-400px; z-index:30;}
+#lanrenzhijia ul li{ width:100px; height:auto; overflow:hidden;float:left; text-align:center;  position:relative;}
+#lanrenzhijia ul li a{ width:100%; height:40px; line-height:40px; margin-bottom:10px;display:block; float:left;font-size:14px; font-family:'微软雅黑'; color:#666; font-weight:bold; text-decoration:none;background:url(http://demo.lanrenzhijia.com/2014/nav1216/images/nav_line.jpg) left center no-repeat;}
+#lanrenzhijia ul li a.first{ background:none;}
+#lanrenzhijia ul li a:hover{text-decoration:none;}
+#lanrenzhijia ul li.on a{ color:#e46b12;}
+#lanrenzhijia ul li .second{ width:80px; height:130px; padding:10px; float:left; background:#ccc; display:none;}
+#lanrenzhijia .dot{ width:800px;height:8px; line-height:8px; position:absolute; left:50%; top:40px; margin-left:-400px; z-index:20;}
+#lanrenzhijia .dot ul{width:800px;height:8px; line-height:8px; position:relative;}
+#lanrenzhijia .dot ul span{ width:100px; height:8px; background:url(http://demo.lanrenzhijia.com/2014/nav1216/images/dot.gif) no-repeat center center; display:block; position:absolute; left:0; top:0;}
+#lanrenzhijia #slide{ width:100%; height:0; background:#e46b12; overflow:hidden; position:absolute; left:0; top:50px; z-index:10;}
+</style>
+</head>
+<body>
+<!-- 代码部分begin -->
+<div id="lanrenzhijia">
+	<ul id="nav">
+    	<li class="on"><a href="http://www.lanrenzhijia.com/flash" class="first">Flash素材</a><div class="second">1</div></li>
+        <li><a href="http://www.lanrenzhijia.com/nav">菜单导航</a><div class="second">2</div></li>
+        <li><a href="http://www.lanrenzhijia.com/time">时间日期</a><div class="second">3</div></li>
+        <li><a href="http://www.lanrenzhijia.com/banner">焦点图</a><div class="second">4</div></li>
+        <li><a href="http://www.lanrenzhijia.com/tab">tab标签</a><div class="second">5</div></li>
+        <li><a href="http://www.lanrenzhijia.com/jquery">jquery特效</a><div class="second">6</div></li>
+        <li><a href="http://www.lanrenzhijia.com/service">在线客服</a><div class="second">7</div></li>
+        <li><a href="http://www.lanrenzhijia.com/pic">图片特效</a><div class="second">8</div></li>
+    </ul>
+    <div class="dot"><ul><span></span></ul></div>
+    <div id="slide"></div>
+</div>
+<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.min.js"></script>
+<script>
+$(function(){
+	var liWidth = $('#lanrenzhijia #nav li').width();
+	var secondWidth = $('#lanrenzhijia #nav2 .second').width();	
+	$('#lanrenzhijia #nav li').hover(function(){
+		var index = $(this).index();
+		$('#lanrenzhijia .dot span').stop().animate({
+			left:liWidth*index+'px'
+		},200);
+		$(this).addClass('on').siblings().removeClass('on');
+		$(this).find('.second').fadeIn(600);
+		$('#lanrenzhijia #slide').stop().animate({
+			height:'150px'
+		},400);
+	},function(){
+		$(this).find('.second').fadeOut(600);
+		$('#lanrenzhijia #slide').stop().animate({
+			height:'0'
+		},400);
+	});
+});
+</script>
+<!-- 代码部分end -->
+</body>
+</html>

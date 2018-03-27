@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="ftitApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>点击新增控件并取值</title>
+		<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/angular/angular.min.js"></script>
+		<!--<script src="lib/angular/angular-route.min.js"> </script>-->
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+	</head>
+	<body>
+	<div class="form-group" ng-controller="myCtrl">
+      <label class="col-md-2 control-label">答复内容:</label>
+      <div class="col-md-10">
+      	<table id="id">
+      		<thead>
+      			<tr>
+      				<td>拆分方式</td>
+      				<td>拆分页数</td>
+      			</tr>
+      		</thead>
+      		<tbody>
+      			<tr ng-repeat="reply in fchat.replies">
+      				<td>
+      					<select name="" id="" ng-modal="way{{$index + 1}}" class="form-control">
+                          	<option value="0">连续</option>
+                          	<option value="1">间断</option>
+                          	<option value="2">单页</option>
+                     </select>
+      				</td>
+	      			<td>
+	      				<input type="text" class="form-control" ng-model="reply.value"
+	                                id="reply{{$index + 1}}" name="reply{{$index + 1}}" />
+	      			</td>
+	      			<td>
+	      				 <a href="" ng-click="fchat.incrReply($index)">
+	                             <img src="img/timg.jpg" alt="plus" width="30px" height="30px" />
+	                         </a>
+	                         <a href="" ng-click="fchat.decrReply($index)" ng-show="fchat.canDescReply">
+	                             <img src="img/delete.jpg" alt="minus" width="30px" height="30px"/>
+	                       </a>
+	                         <img src="img/delete.jpg" alt="minus" width="30px" height="30px"
+	                              ng-show="!fchat.canDescReply"/>
+	      			</td>
+	      		</tr>
+      		</tbody>
+      	</table>
+         <!--<input type="hidden" id="replies" name="replies" value="{{fchat.combineReplies()}}" />-->
+         <button type="button" ng-click="fchat.combineReplies()">确定</button>
+     </div>
+ </div>
+<script>
+	 var ftitAppModule = angular.module('ftitApp', ['ng']);
+	 ftitAppModule.controller('myCtrl',
+      function ($scope,$log) {
+          $scope.fchat = new Object();
+          $scope.fchat.replies = [{key: 0, value: ""}];
+          // 初始化时由于只有1条回复，所以不允许删除
+          $scope.fchat.canDescReply = false;
+ 
+         // 增加回复数
+         $scope.fchat.incrReply = function($index) {
+             $scope.fchat.replies.splice($index + 1, 0,
+                 {key: new Date().getTime(), value: ""});   // 用时间戳作为每个item的key
+             // 增加新的回复后允许删除
+             $scope.fchat.canDescReply = true;
+         }
+ 
+         // 减少回复数
+         $scope.fchat.decrReply = function($index) {
+           // 如果回复数大于1，删除被点击回复
+           if ($scope.fchat.replies.length > 1) {
+                 $scope.fchat.replies.splice($index, 1);
+             }
+            // 如果回复数为1，不允许删除
+             if ($scope.fchat.replies.length == 1) {
+                 $scope.fchat.canDescReply = false;
+             }
+         }
+ 
+         $scope.fchat.combineReplies = function() {
+				var mytable=$("#id")
+        		var myData = [];//声明一个数组，用于存放select的值
+        		var myInput= [];//声明一个数组，用于存放input的值
+        		for (var i = 0,tdlen= mytable.length; i < tdlen; i++) {
+            		var select = mytable[i].getElementsByTagName("select");//获取td里所有select
+            		var input = mytable[i].getElementsByTagName('input');//获取td里所有input
+            		for(var i=0; i<input.length; i++){
+    					if(input[i].type=='text'){
+      						myInput.push(input[i].value);
+    					}
+  					}
+            		var len = select.length;//select的个数
+            		if(len==0) continue;//如果个数为0，继续下一个td里select查找
+            		else{
+                		for(var j=0;j<len;j++){//如果个数不为0
+                    		myData.push(select[j].value);//把所有select的值(注意这里是值，不是实际看到的option里的文字)放入myData数组中
+               	 		}
+           	 		}
+        		}
+				console.log(myData)
+				console.log(myInput)
+			
+			var arr=[];
+			for(let i=0;i<myData.length;i++){
+				arr.push([myData[i],myInput[i]])
+			}
+			console.log(arr);
+  		}
+     }
+ );
+</script>
+	</body>
+</html>

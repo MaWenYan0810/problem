@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<input type="text" name="userName" id="name" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">
+		<button onclick="get()">点击</button>
+		<script>
+			function get(){
+				alert("dsds")
+				console.log($("#name").val())
+			}
+			
+		</script>
+	</body>
+</html>

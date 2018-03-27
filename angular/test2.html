@@ -1,0 +1,126 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+<script src="lib/angular/angular.min.js"></script>
+</head>
+<body>
+
+<h2>验证实例</h2>
+
+ <form name="addForm" novalidate ng-submit="addSure()" id="userForm" class="form-horizontal" ng-app="app" ng-controller="login">
+            <div class="modal-body">
+                <div class="form-group">
+                     <div>
+                        <label  class="col-sm-2 control-label">用户名</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="username" class="form-control" placeholder="请输入用户名称"
+                                ng-model="users.username"
+                                minlength="3"
+                                maxlength="20"
+                                ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                required ng-pattern="/^[a-z]{0,32}$/g" ng-focus/>
+                        </div>
+                    </div>
+                     <div class="form-error"
+                        ng-show="(addForm.username.$invalid && addForm.username.$dirty && !addForm.username.$focused) || (addForm.username.$invalid && submitted )">
+                     	<small ng-show="addForm.username.$error.required">用户名不能为空</small>
+                     	<span ng-show="addForm.username.$error.minlength">用户名长度不能少于3个字符</span>
+                     	<span ng-show="addForm.username.$error.maxlength">用户名长度不能长于20个字符</span>
+                     	<span ng-show="addForm.username.$error.pattern">用户名只能由小写英文组成</span>
+                     </div>
+                </div>
+                <div class="form-group ">
+                    <div>
+                        <label  class="col-sm-2 control-label">手机号</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="phone" class="form-control" placeholder="请输入手机号码"
+                                     ng-model="users.phone"
+                                     maxlength="11"
+                                     ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                     required ng-pattern="/1[3|5|7|8|][0-9]{9}/" ng-focus/>
+                            </div>
+                    </div>
+                    <div class="form-error"
+                         ng-show="(addForm.phone.$invalid && addForm.phone.$dirty && !addForm.phone.$focused) || (addForm.phone.$invalid && submitted )">
+                        <span ng-show="addForm.phone.$error.required">手机号不能为空</span>
+                        <span ng-show="addForm.phone.$error.pattern">请输入正确的手机号码</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label  class="col-sm-2 control-label">住址</label>
+                        <div class="col-sm-9">
+                             <input type="text" name="address" class="form-control" placeholder="请输入住址"
+                                ng-model="users.address"
+                                ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                maxlength="30" required  ng-focus/>
+                        </div>
+                    </div>
+                    <div class="form-error"
+                         ng-show="(addForm.address.$invalid && addForm.address.$dirty && !addForm.address.$focused) || (addForm.address.$invalid && submitted)">
+                        <span ng-show="addForm.address.$error.required">住址不能为空</span>
+                    </div>
+                                    </div>
+                <div class="form-group">
+                    <div>
+                        <label  class="col-sm-2 control-label">邮箱</label>
+                        <div class="col-sm-9">
+                             <input type="text" name="email" class="form-control" placeholder="请输入邮箱"
+                                    ng-model="users.email"
+                                    ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                    ng-pattern="/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/"
+                                 required  ng-focus/>
+                        </div>
+                    </div>
+                    <div class="form-error"
+                        ng-show="(addForm.email.$invalid && addForm.email.$dirty && !addForm.email.$focused) || (addForm.email.$invalid && submitted)">
+                    	<span ng-show="addForm.email.$error.pattern">邮箱必须由数字或字母组成,必须包含@</span>
+                    	<span ng-show="addForm.email.$error.required">邮箱不能为空</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label  class="col-sm-2 control-label">文件名</label>
+                        <div class="col-sm-9">
+                             <!--<input type="text" name="filename" class="form-control" placeholder="请输入文件"
+                                    ng-model="users.filename"
+                                    ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                    ng-pattern="/([^\\s\\\\/:\\*\\?\\\<>\\|](\\x20|[^\\s\\\\/:\\*\\?\\\<>\\|])*[^\\s\\\\/:\\*\\?\\\<>\\|\\.]$)/"
+                                 required  ng-focus/>-->
+                                  <input type="text" name="filename" class="form-control" placeholder="请输入文件"
+                                    ng-model="users.filename"
+                                    ng-keypress="$event.preventDefault()" ng-paste="$event.preventDefault()"
+                                    ng-pattern="/[^/////:/*/?//</>/|]{1,255}$/"
+                                 required  ng-focus/>
+                        </div>
+                    </div>
+                    <div class="form-error"
+                        ng-show="(addForm.filename.$invalid && addForm.filename.$dirty && !addForm.filename.$focused) || (addForm.filename.$invalid && submitted)">
+                    	<span ng-show="addForm.filename.$error.pattern">文件名称不能包含<> */|？</span>
+                    	<span ng-show="addForm.filename.$error.required">文件不能为空</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="reset" ng-click="close()">重置</button>
+                <button class="btn btn-primary"  type="submit" ng-disabled="addForm.$invalid&&addForm.$dirty">确定</button>
+            </div>
+        </form>
+<script>
+var app = angular.module('app', []);
+app.controller('login', function($scope) {
+	$scope.addSure=function(){
+		   if ($scope.addForm.$valid) {
+		   	console.log($scope.users)
+		   }else{
+		   	
+		   }
+	}
+   
+});
+</script>
+
+</body>
+</html>
