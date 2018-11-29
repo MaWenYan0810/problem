@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+ 
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+	</head>
+ 
+	<body>
+		<pre id="aa"></pre>
+<div style="display:none" id="w">希望BOM 有锁定保护功能，有些特殊机型或外贸部分机型有些特定的要求，ECN 不影响到这些BOM，或解决方案： 在BOM中添加一个自定义项，建立BOM时对此类需保护BOM添加锁定标识，在ECN处理时遇到此类BOM则暂缓执行，弹出对话框告知用户“某某BOM已被锁定，请确认是否继续执行”，选“确定”则全部变更，“放弃”则仅对未锁定BOM进行变更。
+
+</div>
+	</body>
+	<script>
+        //方法一
+		// var index=0;
+        // var word=document.getElementById("w").innerHTML;
+        // function type(){
+        //     document.getElementById("aa").innerText = word.substring(0,index++);
+        // }
+        // setInterval(type, 250);
+        //方法二
+         window.onload=function(){
+            var story = document.getElementById('w');
+            var s = document.getElementById('aa');
+            var i = 0;
+            timer=setInterval(function(){
+                s.innerHTML=story.innerHTML.substring(0,i);
+                i++;
+                if(s.innerHTML==story.innerHTML){
+                    clearInterval(timer);
+                }
+            },200);
+        }
+	</script>
+</html>
